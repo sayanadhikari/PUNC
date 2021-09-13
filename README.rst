@@ -66,6 +66,12 @@ In addition, we recommend the following tools for pre- and post-processing:
 .. _ParaView: https://www.paraview.org/
 .. _Anaconda: https://www.anaconda.com/
 
+To initiate the submodule in your git repo ::
+
+ $ git submodule init
+ $ git submodule update
+
+
 Getting Started
 ---------------
 
