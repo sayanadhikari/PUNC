@@ -88,9 +88,9 @@ To generate the mesh from the GUI, run ``Mesh -> 2D``. The mesh can be saved usi
 
 The mesh can also be generated and saved directly from the terminal::
 
-    $ gmsh -2 -format msh2 laframboise_sphere_in_cube_res1.geo
+    $ gmsh -3 -format msh2 laframboise_sphere_in_cube_res1.geo
 
-``-format msh2`` makes sure it is saved in the correct format, and ``-2`` means that it is a 2D mesh. For a 3D mesh it would be ``-3`` instead. The mesh is named ``laframboise_sphere_in_cube_res1.msh`` and should look something like this when opened in Gmsh:
+``-format msh2`` makes sure it is saved in the correct format, and ``-3`` means that it is a 3D mesh. For a 2D mesh it would be ``-2`` instead. The mesh is named ``laframboise_sphere_in_cube_res1.msh`` and should look something like this when opened in Gmsh:
 
 The mesh we have created from the file ``laframboise_sphere_in_cub_res1.geo`` using Gmsh, now can be converted to FEniCS XML format using FEniCS's built-in command line tool::
 
