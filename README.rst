@@ -80,10 +80,20 @@ PUNC consists of a Python library, as well as an executable program. The library
     $ cd punc/simulations
     $ punc laframboise.cfg.py
 
-where ```laframboise.cfg.py``` is a configuration file where you specify the plasma parameters and simulation parameters. It is fully Python scriptable, which means you can for instance compute the thermal velocity (needed by PUNC) from temperature, etc. Specific variables in the configuration file is treated as input. What these are, is for now only documented in the top of ```punc/object_interaction.py``` (which is, in fact, the ``punc`` command).
+where ``laframboise.cfg.py`` is a configuration file where you specify the plasma parameters and simulation parameters. It is fully Python scriptable, which means you can for instance compute the thermal velocity (needed by PUNC) from temperature, etc. Specific variables in the configuration file is treated as input. What these are, is for now only documented in the top of ``punc/object_interaction.py`` (which is, in fact, the ``punc`` command).
 
-The configuration file also specifies which mesh to use. The attached configuration file ```laframboise.cfg.py``` looks for a collection of XML files starting with ```laframboise_sphere_in_cub_res1```. This is the mesh format used by FEniCS and the mesh is not included in the repository. However, a suite of simulation geometries (```.geo``` files) for Gmsh, including the one needed for the example, is available in the folder ```punc/mesh```. The mesh can be created from the file ```laframboise_sphere_in_cub_res1.geo``` using Gmsh, and converted to FEniCS XML format using FEniCS's built-in command line tool::
+The configuration file also specifies which mesh to use. The attached configuration file ``laframboise.cfg.py`` looks for a collection of XML files starting with ``laframboise_sphere_in_cub_res1``. This is the mesh format used by FEniCS and the mesh is not included in the repository. However, a suite of simulation geometries (``.geo`` files) for Gmsh, including the one needed for the example, is available in the folder ``punc/mesh``. 
+
+To generate the mesh from the GUI, run ``Mesh -> 2D``. The mesh can be saved using ``File -> Save Mesh``, and it will automatically be named ``cylinder.msh``. If, however, you use ``Gmsh 4``, the default ``.msh`` format is of a newer variety than is incompatible with the ``dolfin-convert`` tool we shall use later. In this case, you must go to ``File -> Export``, and export it as ``cylinder.msh``. You will be asked to choose format, and should choose ``Version 2 - ASCII``.
+
+The mesh can also be generated and saved directly from the terminal::
+
+    $ gmsh -2 -format msh2 laframboise_sphere_in_cube_res1.geo
+
+``-format msh2`` makes sure it is saved in the correct format, and ``-2`` means that it is a 2D mesh. For a 3D mesh it would be ``-3`` instead. The mesh is named ``laframboise_sphere_in_cube_res1.msh`` and should look something like this when opened in Gmsh:
+
+The mesh we have created from the file ``laframboise_sphere_in_cub_res1.geo`` using Gmsh, now can be converted to FEniCS XML format using FEniCS's built-in command line tool::
 
     dolfin-convert laframboise_sphere_in_cube_res1.msh  laframboise_sphere_in_cube_res1.xml
 
-Field quantities is written to ```*.pvd``` files which can readily be analyzed using e.g. ParaView, and history data is written for each time-step to ```history.dat```. This can be visualized using the supplied ```monitor.py``` script.
+Field quantities is written to ``*.pvd`` files which can readily be analyzed using e.g. ParaView, and history data is written for each time-step to ``history.dat``. This can be visualized using the supplied ``monitor.py`` script.
